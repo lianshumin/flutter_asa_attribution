@@ -19,19 +19,19 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    requestAttributionDetails();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
+  Future<void> requestAttributionDetails() async {
     Map<String, dynamic>? data;
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
-    // try {
-    //   data = await FlutterAsaAttribution.instance.requestAttributionDetails();
-    // } on PlatformException {
-    //
-    // }
+    try {
+      data = await FlutterAsaAttribution.instance.requestAttributionDetails();
+    } on PlatformException {
+
+    }
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling

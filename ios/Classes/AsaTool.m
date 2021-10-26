@@ -5,6 +5,18 @@
 
 @implementation AsaTool
 
++ (String *)attributionToken {
+    if (@available(iOS 14.3, *)) {
+        NSError *error;
+        NSString *token = [AAAttribution attributionTokenWithError:&error];
+        NSLog(@"[FlutterAsaAttribution]: AdServces-Token %@", token);
+        return token;
+    } else {
+        NSLog(@"[FlutterAsaAttribution]: Only support iOS 14.3 and later");
+        return nil;
+    }
+}
+
 + (void)requestAttributionWithComplete:(void(^)(NSDictionary *data, NSError *error))complete {
     if (@available(iOS 14.3, *)) {
         NSError *error;

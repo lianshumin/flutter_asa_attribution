@@ -27,4 +27,10 @@ class FlutterAsaAttribution {
       );
     }
   }
+
+  String? attributionToken() {
+    return _channel.invokeMethod(
+      'attributionToken',
+    );
+  }
 }

@@ -22,8 +22,10 @@
               result([FlutterError errorWithCode:@"FAILED" message:error.localizedFailureReason details:nil]);
           }
       }];
+  } else if ([@"attributionToken" isEqualToString:call.method]) {
+      result([AsaTool attributionToken]);
   } else {
-    result(FlutterMethodNotImplemented);
+      result(FlutterMethodNotImplemented);
   }
 }
 
