@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/flutter_asa_attribution.iml" filepath="$PROJECT_DIR$/flutter_asa_attribution.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/flutter_asa_attribution_android.iml" filepath="$PROJECT_DIR$/android/flutter_asa_attribution_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/example/android/flutter_asa_attribution_example_android.iml" filepath="$PROJECT_DIR$/example/android/flutter_asa_attribution_example_android.iml" />
+    </modules>
+  </component>
+</project>
