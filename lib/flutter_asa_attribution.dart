@@ -1,2 +1,2 @@
 
-import 'src/flutter_asa_attribution.dart';
+export 'src/flutter_asa_attribution.dart';
