@@ -10,7 +10,6 @@
                                                                 binaryMessenger:[registrar messenger]];
     FlutterAsaAttributionPlugin *instance = [[FlutterAsaAttributionPlugin alloc] init];
     [registrar addMethodCallDelegate:instance channel:channel];
-    NSLog(@"[FlutterAsaAttributionPlugin]: register");
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {

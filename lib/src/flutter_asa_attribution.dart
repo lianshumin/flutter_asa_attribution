@@ -28,7 +28,7 @@ class FlutterAsaAttribution {
     }
   }
 
-  String? attributionToken() {
+  Future<String?> attributionToken() {
     return _channel.invokeMethod(
       'attributionToken',
     );

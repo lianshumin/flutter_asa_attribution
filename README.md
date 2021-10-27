@@ -8,13 +8,29 @@ A apple search ads attribution plugin for flutter
 
 2、Add the AdServices Framework to Your Xcode Project
 
+3、Add the AdSupport Framework to Your Xcode Project
+
+4、Add the AppTrackingTransparency Framework to Your Xcode Project
+
 ## Flutter
+
+How to use
+
+```dart
+import 'package:flutter_asa_attribution/flutter_asa_attribution.dart';
+
+String? token = await FlutterAsaAttribution.instance.attributionToken();
+
+Map<String, dynamic>? data = await FlutterAsaAttribution.instance.requestAttributionDetails()
+```
+
+
 
 The following example shows the dictionary structure you receive when you call requestAttributionDetails
 
 14.3 and higher
 
-```
+```json
 {
   "attribution": true,
   "orgId": 40669820,
@@ -30,7 +46,7 @@ The following example shows the dictionary structure you receive when you call r
 
 It allows you to measure attribution for devices using iOS 10 and later, for users who do not have Limit Ad Tracking (LAT) enabled.
 
-```
+```json
 { 
 "Version3.1" = { 
 "iad-attribution" = true; 

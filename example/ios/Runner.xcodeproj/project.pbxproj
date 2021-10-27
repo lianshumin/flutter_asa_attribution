@@ -10,6 +10,7 @@
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		35B7395BA3248CD5D114B704 /* libPods-Runner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 213E11692CC5D95EB70A22C6 /* libPods-Runner.a */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
+		6FC0BF382728E6CD00237BA6 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC0BF362728E64F00237BA6 /* AppTrackingTransparency.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6FDA078527279B940019A7E1 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FDA078427279B940019A7E1 /* iAd.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6FDA078727279B9B0019A7E1 /* AdServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FDA078627279B9B0019A7E1 /* AdServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6FDA078927279BA00019A7E1 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FDA078827279BA00019A7E1 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -39,6 +40,7 @@
 		206639EB025F8AF774C259F6 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		213E11692CC5D95EB70A22C6 /* libPods-Runner.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Runner.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
+		6FC0BF362728E64F00237BA6 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		6FDA078427279B940019A7E1 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		6FDA078627279B9B0019A7E1 /* AdServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdServices.framework; path = System/Library/Frameworks/AdServices.framework; sourceTree = SDKROOT; };
 		6FDA078827279BA00019A7E1 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -62,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FC0BF382728E6CD00237BA6 /* AppTrackingTransparency.framework in Frameworks */,
 				6FDA078527279B940019A7E1 /* iAd.framework in Frameworks */,
 				6FDA078727279B9B0019A7E1 /* AdServices.framework in Frameworks */,
 				6FDA078927279BA00019A7E1 /* AdSupport.framework in Frameworks */,
@@ -85,6 +88,7 @@
 		6FDA078327279B940019A7E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6FC0BF362728E64F00237BA6 /* AppTrackingTransparency.framework */,
 				6FDA078827279BA00019A7E1 /* AdSupport.framework */,
 				6FDA078627279B9B0019A7E1 /* AdServices.framework */,
 				6FDA078427279B940019A7E1 /* iAd.framework */,

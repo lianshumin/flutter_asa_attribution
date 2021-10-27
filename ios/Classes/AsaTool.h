@@ -4,7 +4,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AsaTool : NSObject
 
-+ (String *)attributionToken;
++ (NSString *)attributionToken;
 
 + (void)requestAttributionWithComplete:(void(^)(NSDictionary *data, NSError *error))complete;
 

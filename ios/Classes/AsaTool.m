@@ -5,12 +5,10 @@
 
 @implementation AsaTool
 
-+ (String *)attributionToken {
++ (NSString *)attributionToken {
     if (@available(iOS 14.3, *)) {
         NSError *error;
-        NSString *token = [AAAttribution attributionTokenWithError:&error];
-        NSLog(@"[FlutterAsaAttribution]: AdServces-Token %@", token);
-        return token;
+        return [AAAttribution attributionTokenWithError:&error];
     } else {
         NSLog(@"[FlutterAsaAttribution]: Only support iOS 14.3 and later");
         return nil;
@@ -21,7 +19,6 @@
     if (@available(iOS 14.3, *)) {
         NSError *error;
         NSString *token = [AAAttribution attributionTokenWithError:&error];
-        NSLog(@"[FlutterAsaAttribution]: AdServces-Token %@", token);
         if (token != nil && token.length > 0) {
             [self requestAttributionWithToken:token complete:complete];
         } else {
@@ -39,7 +36,6 @@
         
         if (enable) {
             if ([[ADClient sharedClient] respondsToSelector:@selector(requestAttributionDetailsWithBlock:)]) {
-                NSLog(@"[FlutterAsaAttribution]: iAd called");
                 [[ADClient sharedClient] requestAttributionDetailsWithBlock:complete];
             }
         } else {
