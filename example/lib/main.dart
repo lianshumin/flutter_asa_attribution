@@ -32,7 +32,9 @@ class _MyAppState extends State<MyApp> {
 
     try {
       data = await FlutterAsaAttribution.instance.requestAttributionDetails();
-    } on PlatformException {}
+    } on PlatformException {
+
+    }
 
     if (!mounted) return;
 

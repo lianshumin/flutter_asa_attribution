@@ -16,10 +16,10 @@ class FlutterAsaAttribution {
   Future<Map<String, dynamic>?> requestAttributionDetails() async {
     assert(Platform.isIOS);
     try {
-      final Map<String, dynamic>? result = await _channel.invokeMethod(
+      final Map? result = await _channel.invokeMethod<Map>(
         'requestAttributionDetails',
       );
-      return result;
+      return result?.cast<String, dynamic>() ?? <String, dynamic>{};
     } on PlatformException catch (e) {
       throw PlatformException(
         code: e.code,

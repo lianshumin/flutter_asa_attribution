@@ -36,7 +36,19 @@
         
         if (enable) {
             if ([[ADClient sharedClient] respondsToSelector:@selector(requestAttributionDetailsWithBlock:)]) {
-                [[ADClient sharedClient] requestAttributionDetailsWithBlock:complete];
+                [[ADClient sharedClient] requestAttributionDetailsWithBlock:^(NSDictionary<NSString *,NSObject *> * _Nullable attributionDetails, NSError * _Nullable error) {
+                    if (error != nil) {
+                        complete(nil, error);
+                    } else {
+                        NSString *key = [attributionDetails allKeys].firstObject;
+                        if (key != nil) {
+                            NSDictionary *dict = (NSDictionary *)attributionDetails[key];
+                            complete(dict, nil);
+                        } else {
+                            complete(nil, [[NSError alloc] initWithDomain:@"app" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Data is Empty"}]);
+                        }
+                    }
+                }];
             }
         } else {
             complete(nil, [[NSError alloc] initWithDomain:@"app" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"ATTracking Not Allowed"}]);
