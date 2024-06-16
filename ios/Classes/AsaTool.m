@@ -1,58 +1,21 @@
 #import "AsaTool.h"
-#import <iAd/iAd.h>
 #import <AdServices/AdServices.h>
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
 
 @implementation AsaTool
 
 + (NSString *)attributionToken {
-    if (@available(iOS 14.3, *)) {
-        NSError *error;
-        return [AAAttribution attributionTokenWithError:&error];
-    } else {
-        NSLog(@"[FlutterAsaAttribution]: Only support iOS 14.3 and later");
-        return nil;
-    }
+    NSError *error;
+    return [AAAttribution attributionTokenWithError:&error];
 }
 
 + (void)requestAttributionWithComplete:(void(^)(NSDictionary *data, NSError *error))complete {
-    if (@available(iOS 14.3, *)) {
-        NSError *error;
-        NSString *token = [AAAttribution attributionTokenWithError:&error];
-        if (token != nil && token.length > 0) {
-            [self requestAttributionWithToken:token complete:complete];
-        } else {
-            complete(nil, error);
-        }
+    NSError *error;
+    NSString *token = [AAAttribution attributionTokenWithError:&error];
+    if (token != nil && token.length > 0) {
+        [self requestAttributionWithToken:token complete:complete];
     } else {
-        BOOL enable = true;
-        if (@available(iOS 14.0, *)) {
-            ATTrackingManagerAuthorizationStatus status = [ATTrackingManager trackingAuthorizationStatus];
-            enable = status == (ATTrackingManagerAuthorizationStatusNotDetermined | ATTrackingManagerAuthorizationStatusAuthorized);
-            if (@available(iOS 14.5, *)) {
-                enable = status == ATTrackingManagerAuthorizationStatusAuthorized;
-            }
-        }
-        
-        if (enable) {
-            if ([[ADClient sharedClient] respondsToSelector:@selector(requestAttributionDetailsWithBlock:)]) {
-                [[ADClient sharedClient] requestAttributionDetailsWithBlock:^(NSDictionary<NSString *,NSObject *> * _Nullable attributionDetails, NSError * _Nullable error) {
-                    if (error != nil) {
-                        complete(nil, error);
-                    } else {
-                        NSString *key = [attributionDetails allKeys].firstObject;
-                        if (key != nil) {
-                            NSDictionary *dict = (NSDictionary *)attributionDetails[key];
-                            complete(dict, nil);
-                        } else {
-                            complete(nil, [[NSError alloc] initWithDomain:@"app" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Data is Empty"}]);
-                        }
-                    }
-                }];
-            }
-        } else {
-            complete(nil, [[NSError alloc] initWithDomain:@"app" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"ATTracking Not Allowed"}]);
-        }
+        complete(nil, error);
     }
 }
 
