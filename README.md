@@ -43,29 +43,3 @@ The following example shows the dictionary structure you receive when you call r
   "creativeSetId": 542317136
 }
 ```
-
-It allows you to measure attribution for devices using iOS 10 and later, for users who do not have Limit Ad Tracking (LAT) enabled.
-
-```json
-{ 
-"Version3.1" = { 
-"iad-attribution" = true; 
-"iad-org-name" = "org name";
-"iad-org-id" = "555555";
-"iad-campaign-id" = "12345678"; 
-"iad-campaign-name" = "campaign name"; 
-"iad-purchase-date" = "2020-08-04T17:18:07Z" 
-"iad-conversion-date" = "2020-08-04T17:18:07Z"; 
-"iad-conversion-type" = "newdownload"; 
-"iad-click-date" = "2020-08-04T17:17:00Z"; 
-"iad-adgroup-id" = "12345678"; 
-"iad-adgroup-name" = "adgroup name"; 
-"iad-country-or-region" = "US"; 
-"iad-keyword" = "keyword";
-"iad-keyword-id" = "12345678";
-"iad-keyword-matchtype" = "Broad";
-"iad-creativeset-id" = "12345678";
-"iad-creativeset-name" = "Creative Set name";
-}
-```
-
