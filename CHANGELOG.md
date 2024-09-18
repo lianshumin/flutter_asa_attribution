@@ -1,3 +1,7 @@
+## 0.0.4
+
+* Remove deprecated iAd-related APIs.
+
 ## 0.0.3
 
 * fix get attribution data

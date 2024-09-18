@@ -1,86 +1,68 @@
 #import "AsaTool.h"
-#import <iAd/iAd.h>
 #import <AdServices/AdServices.h>
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
 
 @implementation AsaTool
 
-+ (NSString *)attributionToken {
++ (nullable NSString *)attributionToken {
     if (@available(iOS 14.3, *)) {
         NSError *error;
-        return [AAAttribution attributionTokenWithError:&error];
+        NSString *token = [AAAttribution attributionTokenWithError:&error];
+        if (error) {
+            NSLog(@"[FlutterAsaAttribution]: Failed to retrieve attribution token: %@", error.localizedDescription);
+        }
+        return token;
     } else {
         NSLog(@"[FlutterAsaAttribution]: Only support iOS 14.3 and later");
         return nil;
     }
 }
 
-+ (void)requestAttributionWithComplete:(void(^)(NSDictionary *data, NSError *error))complete {
++ (void)requestAttributionWithComplete:(void(^)(NSDictionary * _Nullable data, NSError * _Nullable error))complete {
     if (@available(iOS 14.3, *)) {
         NSError *error;
-        NSString *token = [AAAttribution attributionTokenWithError:&error];
-        if (token != nil && token.length > 0) {
+        NSString *token = [self attributionToken];
+
+        if (token.length > 0) {
             [self requestAttributionWithToken:token complete:complete];
         } else {
-            complete(nil, error);
+            if (complete) {
+                complete(nil, error ?: [NSError errorWithDomain:@"app" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Failed to retrieve attribution token"}]);
+            }
         }
     } else {
-        BOOL enable = true;
-        if (@available(iOS 14.0, *)) {
-            ATTrackingManagerAuthorizationStatus status = [ATTrackingManager trackingAuthorizationStatus];
-            enable = status == (ATTrackingManagerAuthorizationStatusNotDetermined | ATTrackingManagerAuthorizationStatusAuthorized);
-            if (@available(iOS 14.5, *)) {
-                enable = status == ATTrackingManagerAuthorizationStatusAuthorized;
-            }
-        }
-        
-        if (enable) {
-            if ([[ADClient sharedClient] respondsToSelector:@selector(requestAttributionDetailsWithBlock:)]) {
-                [[ADClient sharedClient] requestAttributionDetailsWithBlock:^(NSDictionary<NSString *,NSObject *> * _Nullable attributionDetails, NSError * _Nullable error) {
-                    if (error != nil) {
-                        complete(nil, error);
-                    } else {
-                        NSString *key = [attributionDetails allKeys].firstObject;
-                        if (key != nil) {
-                            NSDictionary *dict = (NSDictionary *)attributionDetails[key];
-                            complete(dict, nil);
-                        } else {
-                            complete(nil, [[NSError alloc] initWithDomain:@"app" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"Data is Empty"}]);
-                        }
-                    }
-                }];
-            }
-        } else {
-            complete(nil, [[NSError alloc] initWithDomain:@"app" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"ATTracking Not Allowed"}]);
+        if (complete) {
+            complete(nil, [NSError errorWithDomain:@"app" code:-1 userInfo:@{NSLocalizedDescriptionKey: @"ATTracking Not Allowed"}]);
         }
     }
 }
 
-+ (void)requestAttributionWithToken:(NSString *)token complete:(void(^)(NSDictionary *data, NSError *error))complete {
-    NSString *url = [NSString stringWithFormat:@"https://api-adservices.apple.com/api/v1/"];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
++ (void)requestAttributionWithToken:(NSString *)token complete:(void(^)(NSDictionary * _Nullable data, NSError * _Nullable error))complete {
+    NSString *url = @"https://api-adservices.apple.com/api/v1/";
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     request.HTTPMethod = @"POST";
     [request addValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
-    NSData *postData = [token dataUsingEncoding:NSUTF8StringEncoding];
-    [request setHTTPBody:postData];
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        NSDictionary *result = NULL;
+    request.HTTPBody = [token dataUsingEncoding:NSUTF8StringEncoding];
+
+    NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {
-            if (complete) {
-                complete(nil, error);
-            }
-        }else{
-            NSError *error;
-            NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-            result = [[NSDictionary alloc] initWithDictionary:dict];
-            if (complete) {
-                complete(result, nil);
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (complete) complete(nil, error);
+            });
+            return;
         }
+
+        NSError *jsonError;
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (complete) {
+                complete(result ?: @{}, jsonError);
+            }
+        });
     }];
+
     [dataTask resume];
 }
-
 
 @end
