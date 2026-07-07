@@ -24,7 +24,7 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flutter_asa_attribution: ^1.1.0
+  flutter_asa_attribution: ^1.1.1
 ```
 
 Then run:
@@ -36,6 +36,8 @@ flutter pub get
 ## iOS setup
 
 The plugin uses Apple's `AdServices` framework and requires iOS 14.3 or later.
+No manual Xcode framework setup is required when installing this plugin through
+CocoaPods or Swift Package Manager.
 
 Make sure your app includes a tracking usage description if you request tracking
 authorization elsewhere in your app:

@@ -1,3 +1,8 @@
+## 1.1.1
+
+* Add Dart documentation comments for the public API.
+* Explicitly link the `AdServices` framework for CocoaPods and Swift Package Manager.
+
 ## 1.1.0
 
 * Add Swift Package Manager support for iOS.

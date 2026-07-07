@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'flutter_asa_attribution'
-  s.version          = '1.1.0'
+  s.version          = '1.1.1'
   s.summary          = 'A apple search ads attribution plugin for flutter'
   s.description      = <<-DESC
 A apple search ads attribution plugin for flutter
@@ -16,6 +16,7 @@ A apple search ads attribution plugin for flutter
   s.source_files = 'flutter_asa_attribution/Sources/flutter_asa_attribution/**/*'
   s.dependency 'Flutter'
   s.platform = :ios, '14.3'
+  s.frameworks = 'AdServices'
 
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
