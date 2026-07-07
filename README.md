@@ -1,32 +1,65 @@
 # flutter_asa_attribution
 
-A apple search ads attribution plugin for flutter
+A Flutter plugin for retrieving Apple Search Ads attribution tokens and campaign
+attribution details on iOS.
 
-## ios
+## Features
 
-1、Add the AdServices Framework to Your Xcode Project
+- Retrieves the Apple Search Ads attribution token with `AdServices`.
+- Requests campaign attribution details from Apple's AdServices attribution API.
+- Supports iOS integration through CocoaPods and Swift Package Manager.
 
-2、Add the AdSupport Framework to Your Xcode Project
+## Platform support
 
-3、Add the AppTrackingTransparency Framework to Your Xcode Project
+| Platform | Support |
+| --- | --- |
+| iOS | iOS 14.3+ |
 
-## Flutter
+Apple Search Ads attribution is only available on iOS. Android, web, macOS,
+Windows, and Linux are not supported by this plugin.
 
-How to use
+## Installation
+
+Add the package to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  flutter_asa_attribution: ^1.1.0
+```
+
+Then run:
+
+```sh
+flutter pub get
+```
+
+## iOS setup
+
+The plugin uses Apple's `AdServices` framework and requires iOS 14.3 or later.
+
+Make sure your app includes a tracking usage description if you request tracking
+authorization elsewhere in your app:
+
+```xml
+<key>NSUserTrackingUsageDescription</key>
+<string>Obtaining Attribution Data</string>
+```
+
+## Usage
 
 ```dart
 import 'package:flutter_asa_attribution/flutter_asa_attribution.dart';
 
-String? token = await FlutterAsaAttribution.instance.attributionToken();
+final token = await FlutterAsaAttribution.instance.attributionToken();
 
-Map<String, dynamic>? data = await FlutterAsaAttribution.instance.requestAttributionDetails()
+final data = await FlutterAsaAttribution.instance.requestAttributionDetails();
 ```
 
+`requestAttributionDetails` returns the attribution response as a
+`Map<String, dynamic>?`. If Apple returns an empty or non-dictionary response,
+the plugin returns an empty map.
 
-
-The following example shows the dictionary structure you receive when you call requestAttributionDetails
-
-14.3 and higher
+Example response:
 
 ```json
 {
@@ -41,3 +74,8 @@ The following example shows the dictionary structure you receive when you call r
   "creativeSetId": 542317136
 }
 ```
+
+## Notes
+
+Apple's attribution API may return limited data depending on user privacy
+settings, campaign configuration, and Apple's attribution rules.

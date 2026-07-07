@@ -1,6 +1,6 @@
 PODS:
   - Flutter (1.0.0)
-  - flutter_asa_attribution (0.0.1):
+  - flutter_asa_attribution (1.1.0):
     - Flutter
 
 DEPENDENCIES:
@@ -14,9 +14,9 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_asa_attribution/ios"
 
 SPEC CHECKSUMS:
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_asa_attribution: 46806223774fa2b8428201dbb868feaf1b060b58
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  flutter_asa_attribution: c5977872d8fbbb146f51d8cce594aab111a6ba8c
 
-PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d
+PODFILE CHECKSUM: d85ddc5f90e8c593f9dc16ef40fc88253b4f8f6b
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

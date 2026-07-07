@@ -1,3 +1,9 @@
+## 1.1.0
+
+* Add Swift Package Manager support for iOS.
+* Migrate the iOS implementation to Swift.
+* Remove the unsupported Android plugin stub.
+
 ## 0.0.4
 
 * Remove deprecated iAd-related APIs.

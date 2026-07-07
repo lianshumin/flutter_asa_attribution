@@ -1,16 +1,18 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_asa_attribution/flutter_asa_attribution.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -32,8 +34,8 @@ class _MyAppState extends State<MyApp> {
 
     try {
       data = await FlutterAsaAttribution.instance.requestAttributionDetails();
-    } on PlatformException {
-
+    } on PlatformException catch (error) {
+      debugPrint('Failed to request attribution details: $error');
     }
 
     if (!mounted) return;
@@ -55,7 +57,7 @@ class _MyAppState extends State<MyApp> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text('Attribution Token: $_token' , textAlign: TextAlign.center),
+            Text('Attribution Token: $_token', textAlign: TextAlign.center),
             Text('Attribution Data: $_data', textAlign: TextAlign.center),
           ],
         ),
