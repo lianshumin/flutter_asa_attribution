@@ -16,7 +16,10 @@ let package = Package(
         .target(
             name: "flutter_asa_attribution",
             dependencies: [],
-            path: "Sources/flutter_asa_attribution"
+            path: "Sources/flutter_asa_attribution",
+            linkerSettings: [
+                .linkedFramework("AdServices")
+            ]
         )
     ]
 )

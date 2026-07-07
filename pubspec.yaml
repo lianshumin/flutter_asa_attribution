@@ -1,6 +1,6 @@
 name: flutter_asa_attribution
 description: A Flutter plugin for retrieving Apple Search Ads attribution tokens and campaign attribution details on iOS.
-version: 1.1.0
+version: 1.1.1
 homepage: https://github.com/lianshumin/flutter_asa_attribution
 repository: https://github.com/lianshumin/flutter_asa_attribution
 issue_tracker: https://github.com/lianshumin/flutter_asa_attribution/issues
